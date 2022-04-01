@@ -23,6 +23,10 @@ export class LessonService {
     return lesson;
   }
 
+  async lessons(): Promise<Lesson[]> {
+    return await this.lessonRepository.find();
+  }
+
   async getLesson(id: string): Promise<Lesson> {
     return await this.lessonRepository.findOne({ id });
   }
