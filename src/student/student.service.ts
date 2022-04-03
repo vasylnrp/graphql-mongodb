@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Student } from './student.entity';
@@ -20,5 +20,13 @@ export class StudentService {
     return student;
   }
 
-  // TODO getStudent and students
+  async getStudent(id: string): Promise<Student> {
+    const student = this.studentRepository.findOne({ id });
+    if (!student) throw new NotFoundException();
+    return student;
+  }
+
+  async getStudents() {
+    return this.studentRepository.find();
+  }
 }
