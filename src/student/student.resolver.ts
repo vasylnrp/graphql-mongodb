@@ -18,7 +18,7 @@ export class StudentResolver {
 
   @Query(() => [StudentType])
   students() {
-    return this.studentService.getStudents();
+    return this.studentService.getStudents([]);
   }
 
   @Query(() => StudentType)

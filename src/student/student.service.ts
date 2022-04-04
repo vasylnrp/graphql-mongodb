@@ -26,7 +26,18 @@ export class StudentService {
     return student;
   }
 
-  async getStudents() {
-    return this.studentRepository.find();
+  async getStudents(ids: string[]): Promise<Student[]> {
+    let condition = {};
+    if (ids.length > 0) {
+      condition = {
+        where: {
+          id: {
+            $in: ids,
+          },
+        },
+      };
+    }
+
+    return await this.studentRepository.find(condition);
   }
 }
